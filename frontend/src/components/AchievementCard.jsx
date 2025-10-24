@@ -16,7 +16,7 @@ import {
   ScaleFade
 } from '@chakra-ui/react';
 import { FaHeart, FaComment, FaClock } from 'react-icons/fa';
-import axios from 'axios';
+import api from '../config/api';
 
 const AchievementCard = ({ achievement, onUpdate }) => {
   const [likes, setLikes] = useState(achievement.likes || 0);
@@ -36,7 +36,7 @@ const AchievementCard = ({ achievement, onUpdate }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`/api/achievements/${achievement.id}/comments`);
+      const response = await api.get(`/api/achievements/${achievement.id}/comments`);
       setComments(response.data);
     } catch (error) {
       console.error('获取评论失败:', error);
@@ -48,7 +48,7 @@ const AchievementCard = ({ achievement, onUpdate }) => {
     setIsLiking(true);
 
     try {
-      const response = await axios.post(`/api/achievements/${achievement.id}/like`);
+      const response = await api.post(`/api/achievements/${achievement.id}/like`);
       setLikes(response.data.likes);
       setIsLiked(true);
       toast({
@@ -87,7 +87,7 @@ const AchievementCard = ({ achievement, onUpdate }) => {
     setIsCommenting(true);
 
     try {
-      await axios.post(`/api/achievements/${achievement.id}/comment`, {
+      await api.post(`/api/achievements/${achievement.id}/comment`, {
         content: newComment
       });
 

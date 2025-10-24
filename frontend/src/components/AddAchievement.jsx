@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { FaImage, FaFont, FaFileAlt } from 'react-icons/fa';
-import axios from 'axios';
+import api from '../config/api';
 
 const AddAchievement = ({ onSuccess }) => {
   const [title, setTitle] = useState('');
@@ -76,7 +76,7 @@ const AddAchievement = ({ onSuccess }) => {
     }
 
     try {
-      await axios.post('/api/achievements', formData, {
+      await api.post('/api/achievements', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       

@@ -165,7 +165,13 @@ app.use((req, res) => {
   res.status(404).json({ error: '接口不存在' });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`服务器运行在端口 ${PORT}`);
-});
+// 对于Vercel部署，导出app而不是启动监听
+module.exports = app;
+
+// 本地开发时启动服务器
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`服务器运行在端口 ${PORT}`);
+  });
+}

@@ -25,7 +25,7 @@ import {
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { FaTrophy, FaRocket } from 'react-icons/fa';
-import axios from 'axios';
+import api from './config/api';
 import AchievementCard from './components/AchievementCard';
 import AddAchievement from './components/AddAchievement';
 
@@ -173,7 +173,7 @@ const App = () => {
   const fetchAchievements = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get('/api/achievements');
+      const response = await api.get('/api/achievements');
       setAchievements(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('获取成就列表失败:', error);
